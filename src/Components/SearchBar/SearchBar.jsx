@@ -9,6 +9,7 @@ const SearchBar = ({ setFoods, setQuery }) => {
       `https://www.themealdb.com/api/json/v1/1/search.php?s=${value}`
     );
     const data = await response.json();
+    if (!value) return alert("Field is required.");
     setFoods(data.meals);
     setQuery(value);
   };
