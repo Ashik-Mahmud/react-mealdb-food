@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { MdFastfood } from "react-icons/md";
 import styled from "styled-components";
-const SearchBar = () => {
+const SearchBar = ({ setQuery }) => {
+  const [value, setValue] = useState("");
   return (
     <SearchArea className="container">
       <span className="logo">
@@ -11,8 +12,14 @@ const SearchBar = () => {
         <span>Food</span> Finder
       </h2>
       <div className="input-group">
-        <input type="search" id="search" placeholder="Search Food" />
-        <button>Search</button>
+        <input
+          type="search"
+          value={value}
+          id="search"
+          onChange={(e) => setValue(e.target.value)}
+          placeholder="Search Food"
+        />
+        <button onClick={() => setQuery(value)}>Search</button>
       </div>
     </SearchArea>
   );
@@ -65,6 +72,7 @@ const SearchArea = styled.div`
       padding: 0.6rem 2rem;
       font-family: poppins;
       border-radius: 50px;
+      cursor: pointer;
       font-size: 1rem;
     }
   }

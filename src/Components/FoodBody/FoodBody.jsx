@@ -1,13 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import { FoodCard } from "./FoodCard";
-export const FoodBody = () => {
+export const FoodBody = ({ foods }) => {
   return (
     <Container className="container">
-      <FoodCard />
-      <FoodCard />
-      <FoodCard />
-      <FoodCard />
+      {foods.map(({ idMeal, strMeal, strArea, strCategory, strMealThumb }) => (
+        <FoodCard
+          key={idMeal}
+          strMeal={strMeal}
+          strArea={strArea}
+          strCategory={strCategory}
+          strMealThumb={strMealThumb}
+        />
+      ))}
     </Container>
   );
 };

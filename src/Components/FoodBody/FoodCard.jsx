@@ -1,18 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-export const FoodCard = () => {
+export const FoodCard = ({ strMeal, strArea, strCategory, strMealThumb }) => {
   return (
     <Card className="card">
-      <img
-        src="https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"
-        alt="food meal image"
-      />
+      <img src={strMealThumb} alt={strMeal} />
       <div className="details">
-        <h3>Spicy Arrabiata Penne </h3>
-        <span>Italian</span>
+        <h3>{strMeal}</h3>
+        <span>{strArea}</span>
         <div>
           <button>Show Details</button>
-          <p>Vegetarian</p>
+          <p>{strCategory}</p>
         </div>
       </div>
     </Card>
