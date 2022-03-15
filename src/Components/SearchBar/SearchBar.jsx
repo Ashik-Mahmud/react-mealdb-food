@@ -1,8 +1,18 @@
 import React, { useState } from "react";
 import { MdFastfood } from "react-icons/md";
 import styled from "styled-components";
-const SearchBar = ({ setQuery }) => {
+const SearchBar = ({ setFoods, setQuery }) => {
   const [value, setValue] = useState("");
+
+  const loadSearchFoods = async () => {
+    const response = await fetch(
+      `https://www.themealdb.com/api/json/v1/1/search.php?s=${value}`
+    );
+    const data = await response.json();
+    setFoods(data.meals);
+    setQuery(value);
+  };
+
   return (
     <SearchArea className="container">
       <span className="logo">
@@ -19,7 +29,7 @@ const SearchBar = ({ setQuery }) => {
           onChange={(e) => setValue(e.target.value)}
           placeholder="Search Food"
         />
-        <button onClick={() => setQuery(value)}>Search</button>
+        <button onClick={loadSearchFoods}>Search</button>
       </div>
     </SearchArea>
   );
