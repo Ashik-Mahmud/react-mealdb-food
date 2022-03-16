@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-export const FoodDetails = ({ setShow, food }) => {
+
+export const FoodDetails = ({ food }) => {
   let {
     strMeal,
     strArea,
@@ -16,7 +17,6 @@ export const FoodDetails = ({ setShow, food }) => {
   } = food;
   return (
     <>
-      <Overlay onClick={() => setShow(false)} />
       <Side>
         <img src={strMealThumb} alt={strMeal} />
         <div className="details">
@@ -70,7 +70,7 @@ const Side = styled.div`
     object-fit: cover;
   }
   .details {
-    padding: 1rem;
+    padding: 1rem 2rem;
     position: relative;
     .ingredients {
       margin: 0.6rem 0rem;
@@ -118,14 +118,4 @@ const Side = styled.div`
       border-radius: 3px;
     }
   }
-`;
-
-const Overlay = styled.div`
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  background: rgba(0, 0, 0, 0.2);
-  left: 0%;
-  top: 0%;
-  backdrop-filter: blur(4px);
 `;

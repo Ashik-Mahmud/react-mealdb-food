@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { animated, useTransition } from "react-spring";
 import styled from "styled-components";
 import { FoodCard } from "./FoodCard";
 import { FoodDetails } from "./FoodDetails";
@@ -6,7 +7,12 @@ export const FoodBody = ({ foods, query }) => {
   const [error] = useState("No Data Found");
   const [show, setShow] = useState(false);
   const [food, setFood] = useState([]);
-
+  const transition = useTransition(show, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+    delay: 300,
+  });
   return (
     <>
       <Container className="container">
@@ -32,18 +38,18 @@ export const FoodBody = ({ foods, query }) => {
           )
         )}
       </Container>
-
-      {show
-        ? food.map((singleFood) => (
-            <>
-              <FoodDetails
-                key={singleFood.idMeal}
-                food={singleFood}
-                setShow={setShow}
-              />{" "}
-            </>
-          ))
-        : null}
+      {show ? <Overlay onClick={() => setShow(false)} /> : ""};
+      {food.map((singleFood) => (
+        <>
+          {transition((style, item) =>
+            item ? (
+              <animated.div style={style}>
+                <FoodDetails key={singleFood.idMeal} food={singleFood} />
+              </animated.div>
+            ) : null
+          )}
+        </>
+      ))}
     </>
   );
 };
@@ -57,4 +63,13 @@ const Container = styled.div`
     text-align: center;
     position: absolute;
   }
+`;
+const Overlay = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.2);
+  left: 0%;
+  top: 0%;
+  backdrop-filter: blur(4px);
 `;
