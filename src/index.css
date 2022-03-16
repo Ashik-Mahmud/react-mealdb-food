@@ -21,3 +21,6 @@ img {
   max-width: 100%;
   height: auto;
 }
+.bg-white {
+  background-color: #fff;
+}

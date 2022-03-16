@@ -17,7 +17,7 @@ export const FoodDetails = ({ food }) => {
   } = food;
   return (
     <>
-      <Side>
+      <Side className="bg-white">
         <img src={strMealThumb} alt={strMeal} />
         <div className="details">
           <h3>
@@ -53,17 +53,16 @@ export const FoodDetails = ({ food }) => {
   );
 };
 const Side = styled.div`
-  width: 40%;
-  position: fixed;
-  right: 0%;
+  width: 100%;
+  position: absolute;
+  left: 0%;
   top: 0%;
   z-index: 1;
-  background: #fff;
   display: grid;
   grid-template-rows: 410px auto 100px;
   height: 100%;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-
+  background: #ffffff;
   img {
     width: 100%;
     height: 400px;
@@ -72,6 +71,7 @@ const Side = styled.div`
   .details {
     padding: 1rem 2rem;
     position: relative;
+    background: #fff;
     .ingredients {
       margin: 0.6rem 0rem;
       display: flex;

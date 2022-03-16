@@ -8,10 +8,19 @@ export const FoodBody = ({ foods, query }) => {
   const [show, setShow] = useState(false);
   const [food, setFood] = useState([]);
   const transition = useTransition(show, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
-    delay: 300,
+    from: {
+      opacity: 0,
+      x: -1000,
+      position: "fixed",
+      left: "0%",
+      top: "0%",
+      width: "40%",
+      background: "#ffff",
+      height: "100%",
+    },
+    enter: { opacity: 1, x: 0 },
+    leave: { opacity: 0, x: -1000 },
+    delay: 200,
   });
   return (
     <>
@@ -39,17 +48,17 @@ export const FoodBody = ({ foods, query }) => {
         )}
       </Container>
       {show ? <Overlay onClick={() => setShow(false)} /> : ""};
-      {food.map((singleFood) => (
-        <>
-          {transition((style, item) =>
-            item ? (
-              <animated.div style={style}>
+      {transition((style, item) =>
+        item ? (
+          <animated.div style={style}>
+            {food.map((singleFood) => (
+              <>
                 <FoodDetails key={singleFood.idMeal} food={singleFood} />
-              </animated.div>
-            ) : null
-          )}
-        </>
-      ))}
+              </>
+            ))}
+          </animated.div>
+        ) : null
+      )}
     </>
   );
 };
