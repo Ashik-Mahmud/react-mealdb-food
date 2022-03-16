@@ -1,6 +1,21 @@
 import React from "react";
 import styled from "styled-components";
-export const FoodCard = ({ strMeal, strArea, strCategory, strMealThumb }) => {
+export const FoodCard = ({
+  uniqueKey,
+  strMeal,
+  strArea,
+  strCategory,
+  strMealThumb,
+  setShow,
+  setFood,
+}) => {
+  const loadDetails = () => {
+    setShow(true);
+    fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${uniqueKey}`)
+      .then((response) => response.json())
+      .then((data) => setFood(data.meals));
+  };
+
   return (
     <Card className="card">
       <img src={strMealThumb} alt={strMeal} />
@@ -8,7 +23,7 @@ export const FoodCard = ({ strMeal, strArea, strCategory, strMealThumb }) => {
         <h3>{strMeal}</h3>
         <span>{strArea}</span>
         <div>
-          <button>Show Details</button>
+          <button onClick={loadDetails}>Show Details</button>
           <p>{strCategory}</p>
         </div>
       </div>
